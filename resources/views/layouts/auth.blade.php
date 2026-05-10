@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-md">
+    <div class="">
         {{ $slot }}
     </div>
     @livewireScripts

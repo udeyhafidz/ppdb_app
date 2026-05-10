@@ -26,7 +26,13 @@ class BerkasTable
                 TextColumn::make('file')
                     ->label('File'),
                 TextColumn::make('status_berkas')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge()
+                    ->colors([
+                        'warning' => 'pending',
+                        'success' => 'valid',
+                        'danger' => 'ditolak',
+                    ]),
                 TextColumn::make('catatan_admin')
                     ->label('Catatan admin')
                     ->searchable(),
