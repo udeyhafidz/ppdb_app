@@ -158,7 +158,7 @@ class FormDaftar extends Component
             'phone_ortu' => $this->phone_ortu,
         ]);
 
-        session()->flash('success', 'Pendaftaran berhasil!.');
+        session()->flash('success', 'Pendaftaran berhasil!');
 
         return redirect()->route('home');
 
