@@ -106,9 +106,7 @@ class BerkasRelationManager extends RelationManager
                 
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                
                 ForceDeleteAction::make(),
                 RestoreAction::make(),
                 Action::make('download')

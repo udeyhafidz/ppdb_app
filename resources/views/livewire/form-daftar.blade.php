@@ -128,7 +128,12 @@
                                 <input type="number" wire:model="nisn" placeholder="Nomor Induk Siswa Nasional"
                                     class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-5 py-4 text-base font-medium text-slate-800 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none placeholder:text-slate-400">
                                 @error('nisn')
-                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold">{{ $message }}</p>
+                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                            class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                clip-rule="evenodd" />
+                                        </svg>{{ $message }}</p>
                                 @enderror
                             </div>
 
@@ -149,7 +154,12 @@
                             <input type="text" wire:model="tmp_lahir" placeholder="Kota/Kabupaten kelahiran"
                                 class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-5 py-4 text-base font-medium text-slate-800 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none placeholder:text-slate-400">
                             @error('tmp_lahir')
-                                <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold">{{ $message }}</p>
+                                <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                        class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -158,7 +168,12 @@
                             <input type="date" wire:model="tgl_lahir"
                                 class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-5 py-4 text-base font-medium text-slate-700 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none">
                             @error('tgl_lahir')
-                                <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold">{{ $message }}</p>
+                                <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                        class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -182,7 +197,12 @@
                                 <input type="number" wire:model="anak_ke" placeholder="Misal: 1"
                                     class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-5 py-4 text-base font-medium text-slate-800 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none placeholder:text-slate-400">
                                 @error('anak_ke')
-                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold">{{ $message }}</p>
+                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                            class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                clip-rule="evenodd" />
+                                        </svg>{{ $message }}</p>
                                 @enderror
                             </div>
 
@@ -192,7 +212,12 @@
                                 <input type="number" wire:model="jumlah_saudara" placeholder="Misal: 2"
                                     class="w-full bg-slate-50/50 border border-slate-200 rounded-2xl px-5 py-4 text-base font-medium text-slate-800 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none placeholder:text-slate-400">
                                 @error('jumlah_saudara')
-                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold">{{ $message }}</p>
+                                    <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                            class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                clip-rule="evenodd" />
+                                        </svg>{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -241,14 +266,26 @@
                                     <input type="text" wire:model="nama_ayah" placeholder="Nama Lengkap Ayah"
                                         class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-base font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400">
                                     @error('nama_ayah')
-                                        <p class="text-red-500 text-sm mt-1 ml-1">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1">
+                                            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>{{ $message }}
+                                        </p>
                                     @enderror
                                 </div>
                                 <div>
                                     <input type="text" wire:model="kerja_ayah" placeholder="Pekerjaan Ayah"
                                         class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-base font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400">
                                     @error('kerja_ayah')
-                                        <p class="text-red-500 text-sm mt-1 ml-1">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1">
+                                            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>{{ $message }}
+                                        </p>
                                     @enderror
                                 </div>
                             </div>
@@ -275,14 +312,26 @@
                                     <input type="text" wire:model="nama_ibu" placeholder="Nama Lengkap Ibu"
                                         class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-base font-medium focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 outline-none transition-all placeholder:text-slate-400">
                                     @error('nama_ibu')
-                                        <p class="text-red-500 text-sm mt-1 ml-1">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1">
+                                            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>{{ $message }}
+                                        </p>
                                     @enderror
                                 </div>
                                 <div>
                                     <input type="text" wire:model="kerja_ibu" placeholder="Pekerjaan Ibu"
                                         class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-base font-medium focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 outline-none transition-all placeholder:text-slate-400">
                                     @error('kerja_ibu')
-                                        <p class="text-red-500 text-sm mt-1 ml-1">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1">
+                                            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>{{ $message }}
+                                        </p>
                                     @enderror
                                 </div>
                             </div>
@@ -304,7 +353,12 @@
                                     class="w-full bg-slate-50/50 px-5 py-4 text-lg font-bold text-slate-800 outline-none placeholder:text-slate-300 placeholder:font-medium tracking-wider">
                             </div>
                             @error('phone_ortu')
-                                <p class="text-red-500 text-sm mt-1.5 text-center font-semibold">{{ $message }}</p>
+                                <p class="text-red-500 text-sm mt-1.5 ml-1 font-semibold flex items-center gap-1"><svg
+                                        class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

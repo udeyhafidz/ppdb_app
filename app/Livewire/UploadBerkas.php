@@ -31,7 +31,7 @@ class UploadBerkas extends Component
     public $foto_lama;
 
     public function mount()
-{
+    {
     $pendaftar = Pendaftar::where(
         'user_id',
         auth()->id()
@@ -90,140 +90,89 @@ class UploadBerkas extends Component
             $this->sudahUpload = true;
         }
     }
-}
+    }
 
     public function simpan()
     {
-        $this->validate([
-            'kk' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'akta' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'ktp' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'foto' => 'required|file|mimes:jpg,jpeg,png|max:2048',
-        ]);
-
         $pendaftar = Pendaftar::where('user_id', Auth::id())->first();
+
         if (!$pendaftar) {
-            session()->flash(
-                'error',
-                'Isi form pendaftaran dulu'
-            );
+            session()->flash('error', 'Isi form pendaftaran dulu');
             return;
         }
 
-        // Upload ke PUBLIC (ini yang penting!)
-        $kkPath = $this->kk->store('berkas', 'public');
-        $aktaPath = $this->akta->store('berkas', 'public');
-        $ktpPath = $this->ktp->store('berkas', 'public');
-        $fotoPath = $this->foto->store('berkas', 'public');
+        // Ambil data berkas terbaru
+        $this->berkas = Berkas::where(
+        'pendaftar_id',
+        $pendaftar->id
+        )->get();
 
-        if ($this->kk) {
-            if ($this->kk_lama) {
-                Storage::disk('public')->delete($this->kk_lama);
-            }
+        $rules = [];
+        $jenisBerkas = ['kk', 'akta', 'ktp', 'foto'];
 
-            Berkas::updateOrCreate(
-                [
-                    'pendaftar_id' => $pendaftar->id,
-                    'jenis_berkas' => 'kk',
-                ],
-                [
-                    'file' => $kkPath,
-                    'status_berkas' => 'pending',
-                    'catatan_admin' => null,
-                ]
+        foreach ($jenisBerkas as $jenis) {
+            $dataBerkas = $this->berkas->firstWhere(
+                'jenis_berkas',
+                $jenis
             );
-        }
-        
-        if ($this->akta) {
-            if ($this->akta_lama) {
-                Storage::disk('public')->delete($this->akta_lama);
-            }
 
-            Berkas::updateOrCreate(
-                [
-                    'pendaftar_id' => $pendaftar->id,
-                    'jenis_berkas' => 'akta',
-                ],
-                [
-                    'file' => $aktaPath,
-                    'status_berkas' => 'pending',
-                    'catatan_admin' => null,
-                ]
-            );
+            $required = !$dataBerkas || $dataBerkas->status_berkas === 'ditolak';
+
+            if ($jenis === 'foto') {
+                $rules[$jenis] =
+                    ($required ? 'required' : 'nullable')
+                    . '|file|mimes:jpg,jpeg,png|max:2048';
+            } else {
+                $rules[$jenis] =
+                    ($required ? 'required' : 'nullable')
+                    . '|file|mimes:pdf,jpg,jpeg,png|max:2048';
+            }
         }
 
-        if ($this->ktp) {
-            if ($this->ktp_lama) {
-                Storage::disk('public')->delete($this->ktp_lama);
-            }
+        $this->validate($rules);
 
-            Berkas::updateOrCreate(
-                [
-                    'pendaftar_id' => $pendaftar->id,
-                    'jenis_berkas' => 'ktp',
-                ],
-                [
-                    'file' => $ktpPath,
-                    'status_berkas' => 'pending',
-                    'catatan_admin' => null,
-                ]
-            );
-        }
-
-        if ($this->foto) {
-            if ($this->foto_lama) {
-                Storage::disk('public')->delete($this->foto_lama);
-            }
-
-            Berkas::updateOrCreate(
-                [
-                    'pendaftar_id' => $pendaftar->id,
-                    'jenis_berkas' => 'foto',
-                ],
-                [
-                    'file' => $fotoPath,
-                    'status_berkas' => 'pending',
-                    'catatan_admin' => null,
-                ]
-            );
-        }
+        // Simpan file yang dipilih
+        $this->simpanBerkas($pendaftar, 'kk', $this->kk, $this->kk_lama);
+        $this->simpanBerkas($pendaftar, 'akta', $this->akta, $this->akta_lama);
+        $this->simpanBerkas($pendaftar, 'ktp', $this->ktp, $this->ktp_lama);
+        $this->simpanBerkas($pendaftar, 'foto', $this->foto, $this->foto_lama);
 
         session()->flash(
             'success',
             'Berkas berhasil diperbarui'
         );
 
-        $rules = [];
-
-    foreach ($this->berkas as $item) {
-        $field = $item->jenis_berkas; // kk, akta, ktp, foto
-
-        // Jika belum ada file ATAU status ditolak
-        if (!$item->file || $item->status_berkas === 'ditolak') {
-            if ($field === 'foto') {
-                $rules[$field] = 'required|file|mimes:jpg,jpeg,png|max:2048';
-            } else {
-                $rules[$field] = 'required|file|mimes:pdf,jpg,jpeg,png|max:2048';
-            }
-        } else {
-            // Jika valid/pending → opsional
-            if ($field === 'foto') {
-                $rules[$field] = 'nullable|file|mimes:jpg,jpeg,png|max:2048';
-            } else {
-                $rules[$field] = 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048';
-            }
-        }
+        return redirect()->route('home');
     }
 
-    $this->validate($rules);
+    private function simpanBerkas($pendaftar, $jenis, $file, $fileLama)
+    {
+        if (!$file) {
+            return;
+        }
 
-        $this->reset();
+        if ($fileLama) {
+            Storage::disk('public')->delete($fileLama);
+        }
 
-        return redirect()->route('home');
+        $path = $file->store('berkas', 'public');
+
+        Berkas::updateOrCreate(
+            [
+                'pendaftar_id' => $pendaftar->id,
+                'jenis_berkas' => $jenis,
+            ],
+            [
+                'file' => $path,
+                'status_berkas' => 'pending',
+                'catatan_admin' => null,
+            ]
+        );
     }
 
     public function render()
     {
         return view('livewire.upload-berkas');
     }
+
 }
