@@ -79,8 +79,38 @@
                 </div>
             </div>
         @empty
-            <div class="py-20 text-center opacity-50">
-                <p class="font-bold text-slate-400 tracking-widest uppercase">No Announcements Found</p>
+            <div class="py-20 flex flex-col items-center justify-center text-center">
+                <!-- Icon Container dengan Efek Glow -->
+                <div class="relative mb-8">
+                    <div class="absolute inset-0 bg-blue-100 rounded-full blur-2xl opacity-40 scale-150"></div>
+                    <div class="relative bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100">
+                        <!-- Heroicons: Megaphone atau Inbox -->
+                        <svg class="w-16 h-16 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="max-w-xs">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Belum Ada Pengumuman</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                        Sepertinya papan informasi kami masih kosong untuk saat ini. Cek kembali nanti ya!
+                    </p>
+                </div>
+
+                <!-- Action Button (Opsional) -->
+                <button onclick="window.location.reload()"
+                    class="inline-flex items-center px-6 py-2.5 bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 font-bold text-sm rounded-xl transition-all duration-300 border border-transparent hover:border-blue-100">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    Refresh Halaman
+                </button>
             </div>
         @endforelse
     </div>

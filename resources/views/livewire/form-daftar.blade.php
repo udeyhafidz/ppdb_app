@@ -387,6 +387,22 @@
                             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out">
                         </div>
                     </button>
+
+                    <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+                        <a href="/"
+                            class="group flex items-center text-slate-500 hover:text-blue-600 font-semibold transition-colors bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-slate-200/60 shadow-sm">
+                            <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali ke Beranda
+                        </a>
+                        <div class="hidden md:block text-right">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Tahun Ajaran
+                                2024/2025</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>

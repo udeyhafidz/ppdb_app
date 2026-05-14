@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pendaftaran/upload-berkas', UploadBerkas::class)->name('upload.berkas');
 });
 
+Route::view('/panduan', 'panduan')
+    ->name('panduan');
+
 Route::post('/logout', function () {
     Auth::logout();
     session()->invalidate();

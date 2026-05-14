@@ -12,12 +12,12 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0f172a;
+            background-color: #2a4688;
         }
 
         /* Menambahkan sedikit efek blur pada teks saat di-hover agar terasa seperti neon lembut */
         nav a:hover {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 8px rgba(129, 60, 60, 0.2);
         }
 
         .glass-nav {
@@ -125,9 +125,11 @@
 
 <body class="bg-[#f8fafc] text-slate-800 flex flex-col min-h-screen">
 
-    <nav class="glass-nav sticky top-0 z-50 border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6">
+    <nav class="glass-nav sticky top-0 z-50 border-b border-white/10" x-data="{ mobileMenu: false, userDropdown: false }">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="flex justify-between items-center h-20">
+
+                <!-- LOGO (Kiri) -->
                 <div class="flex items-center space-x-3">
                     <div
                         class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg shadow-yellow-500/30">
@@ -139,95 +141,41 @@
                     </div>
                 </div>
 
+                <!-- DESKTOP NAVIGATION (Tengah ke Kanan) -->
                 <div class="hidden md:flex items-center space-x-8 text-sm font-semibold">
-
                     <nav class="flex items-center gap-6">
-                        <!-- Beranda -->
                         <a href="/"
-                            class="group relative py-2 text-white font-bold tracking-wide transition-all duration-300 active:scale-90">
-                            <span class="relative z-10 flex items-center gap-2">
-                                <svg class="w-4 h-4 transition-transform group-hover:-translate-y-0.5" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                    </path>
-                                </svg>
-                                Beranda
-                            </span>
+                            class="group relative py-2 text-white font-bold tracking-wide transition-all duration-300">
+                            <span class="relative z-10 flex items-center gap-2">Beranda</span>
                             <span
                                 class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.8)] rounded-full"></span>
                         </a>
-
-                        <!-- Jadwal -->
-                        <a href="/jadwal"
-                            class="group relative py-2 text-slate-300 hover:text-white font-medium tracking-wide transition-all duration-300 active:scale-90">
-                            <span class="relative z-10 flex items-center gap-2">
-                                <svg class="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                Jadwal
-                            </span>
-                            <span
-                                class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 group-hover:w-full group-hover:left-0 shadow-[0_0_15px_rgba(59,130,246,0.6)] rounded-full transition-all duration-300 ease-out"></span>
-                        </a>
-
-                        <!-- Pengumuman -->
-                        <a href="/pengumuman"
-                            class="group relative py-2 text-slate-300 hover:text-white font-medium tracking-wide transition-all duration-300 active:scale-90">
-                            <span class="relative z-10 flex items-center gap-2">
-                                <svg class="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:animate-bounce transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                    </path>
-                                </svg>
-                                Pengumuman
-                            </span>
-                            <span
-                                class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 group-hover:w-full group-hover:left-0 shadow-[0_0_15px_rgba(59,130,246,0.6)] rounded-full transition-all duration-300 ease-out"></span>
-                            <span
-                                class="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping"></span>
-                        </a>
-
-                        <!-- Statistik -->
-                        <a href="/statistik"
-                            class="group relative py-2 text-slate-300 hover:text-white font-medium tracking-wide transition-all duration-300 active:scale-90">
-                            <span class="relative z-10 flex items-center gap-1.5">
-                                <svg class="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                    </path>
-                                </svg>
-                                Statistik
-                            </span>
-                            <span
-                                class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 group-hover:w-full group-hover:left-0 shadow-[0_0_15px_rgba(59,130,246,0.6)] rounded-full transition-all duration-300 ease-out"></span>
-                        </a>
+                        <a href="/jadwal" class="text-slate-300 hover:text-white transition-all">Jadwal</a>
+                        <a href="/pengumuman" class="text-slate-300 hover:text-white transition-all">Pengumuman</a>
+                        <a href="/statistik" class="text-slate-300 hover:text-white transition-all">Statistik</a>
                     </nav>
 
                     <div class="h-6 w-[1px] bg-white/20 mx-2"></div>
 
                     @auth
-                        <div class="relative group">
-                            <button
+                        <!-- USER DROPDOWN (Desktop) -->
+                        <div class="relative">
+                            <button @click="userDropdown = !userDropdown" @click.away="userDropdown = false"
                                 class="flex items-center space-x-3 bg-white/10 hover:bg-white/20 text-white pl-2 pr-4 py-1.5 rounded-full border border-white/20 transition-all">
                                 <div
-                                    class="w-8 h-8 bg-gradient-to-tr from-yellow-400 to-orange-400 text-blue-900 flex items-center justify-center rounded-full font-bold shadow-inner">
+                                    class="w-8 h-8 bg-gradient-to-tr from-yellow-400 to-orange-400 text-blue-900 flex items-center justify-center rounded-full font-bold">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
                                 <span>{{ auth()->user()->name }}</span>
-                                <svg class="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 transition-transform" :class="userDropdown ? 'rotate-180' : ''"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </button>
 
-                            <div
-                                class="absolute right-0 mt-3 w-48 bg-white rounded-2xl shadow-xl py-2 hidden group-hover:block border border-slate-100 animate-in fade-in slide-in-from-top-2">
+                            <div x-show="userDropdown" x-transition
+                                class="absolute right-0 mt-3 w-48 bg-white rounded-2xl shadow-xl py-2 border border-slate-100 z-[60]">
                                 <a href="/profile"
                                     class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-50 transition">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +184,6 @@
                                     </svg>
                                     Profil Saya
                                 </a>
-                                <div class="border-t border-slate-100 my-1"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
@@ -253,15 +200,65 @@
                         </div>
                     @else
                         <div class="flex items-center space-x-3">
-                            <a href="{{ route('login') }}"
-                                class="text-white hover:text-yellow-300 px-4 py-2 transition font-semibold">Masuk</a>
+                            <a href="{{ route('login') }}" class="text-white font-semibold">Masuk</a>
                             <a href="{{ route('register') }}"
-                                class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-6 py-2.5 rounded-full font-bold shadow-lg shadow-yellow-500/30 transition-all hover:-translate-y-0.5 active:translate-y-0">
-                                Daftar Sekarang
-                            </a>
+                                class="bg-yellow-400 text-blue-900 px-6 py-2.5 rounded-full font-bold shadow-lg shadow-yellow-500/30">Daftar</a>
                         </div>
                     @endauth
                 </div>
+
+                <!-- MOBILE BUTTON (Kanan Atas) -->
+                <div class="flex md:hidden">
+                    <button @click="mobileMenu = !mobileMenu" class="text-white p-2 focus:outline-none">
+                        <svg x-show="!mobileMenu" class="w-8 h-8" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                        <svg x-show="mobileMenu" class="w-8 h-8" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU OVERLAY (Hanya tampil di mobile/tab saat diklik) -->
+        <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+            class="md:hidden bg-blue-800 border-t border-white/10 px-4 py-6 space-y-4 shadow-2xl">
+
+            <div class="flex flex-col gap-4">
+                <a href="/" class="text-white font-bold py-2 border-b border-white/5">Beranda</a>
+                <a href="/jadwal" class="text-blue-100 py-2 border-b border-white/5">Jadwal</a>
+                <a href="/pengumuman" class="text-blue-100 py-2 border-b border-white/5">Pengumuman</a>
+                <a href="/statistik" class="text-blue-100 py-2">Statistik</a>
+            </div>
+
+            <div class="pt-4 flex flex-col gap-3">
+                @auth
+                    <div class="flex items-center gap-3 p-3 bg-white/10 rounded-xl mb-2">
+                        <div
+                            class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center font-bold text-blue-900">
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                        </div>
+                        <span class="text-white font-semibold">{{ auth()->user()->name }}</span>
+                    </div>
+                    <a href="/profile"
+                        class="w-full text-center bg-white/10 text-white py-3 rounded-xl font-semibold">Profil Saya</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full text-center bg-red-500/20 text-red-300 py-3 rounded-xl font-semibold border border-red-500/30">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="w-full text-center text-white py-3 font-semibold">Masuk</a>
+                    <a href="{{ route('register') }}"
+                        class="w-full text-center bg-yellow-400 text-blue-900 py-3 rounded-xl font-bold shadow-lg">Daftar
+                        Sekarang</a>
+                @endauth
             </div>
         </div>
     </nav>
@@ -359,6 +356,7 @@
     </footer>
 
     @livewireScripts
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 
 </html>
