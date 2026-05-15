@@ -1,7 +1,9 @@
 <?php
 
+use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Auth\ResetPassword;
 use App\Livewire\DaftarUlangForm;
 use App\Livewire\FormDaftar;
 use App\Livewire\Home;
@@ -23,9 +25,11 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', Home::class)->name('home');
 Route::get('/login', Login::class)->name('login')->middleware('guest');
 Route::get('/register', Register::class)->name('register')->middleware('guest');
+Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
+Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
 Route::get('/pengumuman', Pengumuman::class)->name('pengumuman');
 Route::get('/jadwal', Jadwal::class)->name('jadwal');
-Route::get('statistik', StatistikChart::class)->name('statistik.cart');
+Route::get('/statistik', StatistikChart::class)->name('statistik.cart');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/detail', Detail::class)->name('detail.siswa');

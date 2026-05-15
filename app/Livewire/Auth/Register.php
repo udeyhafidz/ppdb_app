@@ -14,6 +14,7 @@ class Register extends Component
 {
     public $name, $email, $password, $password_confirmation;
     public $otpTerkirim;
+    public $kodeOtp;
 
     public function register() {
         $this->validate([
@@ -22,7 +23,7 @@ class Register extends Component
             'password'  => 'required|confirmed|min:6',
         ]);
 
-        $user = User::create([
+        User::create([
             'name'      => $this->name,
             'email'     => $this->email,
             'password'  => Hash::make($this->password),
@@ -34,7 +35,8 @@ class Register extends Component
     public function kirimOtp()
     {
         $this->validate([
-            'email' => 'required|email|unique:users,email',
+            'name'      => 'required|string|min:4',
+            'email'     => 'required|email|unique:users,email',
         ]);
 
         $otp = rand(100000, 999999);
@@ -70,7 +72,7 @@ class Register extends Component
         }
 
         if (now()->gt(session('otp_expired_at'))) {
-            $this->addError('kodeOtp', 'OTP sudah kedaluwarsa.');
+            $this->addError('kodeOtp', 'Maaf, OTP sudah kedaluwarsa.');
             return;
         }
 
@@ -79,12 +81,18 @@ class Register extends Component
             return;
         }
 
-        // Buat akun setelah OTP valid
+        // Simpan user ke database
+        $this->validate([
+            'name'      => 'required|string|min:4',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required|confirmed|min:6',
+        ]);
+
         User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'role' => 'ortu',
+            'name'      => $this->name,
+            'email'     => $this->email,
+            'password'  => Hash::make($this->password),
+            'role'      => 'ortu',
             'is_active' => false,
         ]);
 

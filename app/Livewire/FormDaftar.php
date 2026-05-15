@@ -167,6 +167,8 @@ class FormDaftar extends Component
 
     public function render()
     {
+        $pendaftar = Pendaftar::where('user_id', auth()->id())->first();
+
         $gelombang = Gelombang::where(
             'status_gelombang',
             'valid'
@@ -184,7 +186,8 @@ class FormDaftar extends Component
         }
 
         return view('livewire.form-daftar', [
-            'gelombang' => $gelombang
+            'gelombang' => $gelombang,
+            'pendaftar' => $pendaftar,
         ]);
     }
 }

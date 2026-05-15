@@ -72,7 +72,7 @@
             @endif
 
             <!-- Form -->
-            <form wire:submit="register" class="space-y-5 relative z-20">
+            <form wire:submit.prevent="verifikasiOtp" class="space-y-5 relative z-20">
 
                 <!-- Nama Input -->
                 <div class="space-y-2" style="animation: slideIn 0.5s ease-out 0.1s both;">
@@ -178,27 +178,108 @@
                 </div>
 
                 {{-- Tombol Kirim OTP --}}
-                <button type="button" wire:click="kirimOtp" class="w-full bg-blue-600 text-white py-3 rounded-lg">
-                    Kirim OTP
+                <button type="button" 
+                        wire:click="kirimOtp"
+                        wire:loading.attr="disabled"
+                        class="group relative w-full flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-br from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white rounded-2xl font-bold text-lg shadow-[0_10px_20px_-10px_rgba(37,99,235,0.5)] hover:shadow-[0_15px_25px_-5px_rgba(37,99,235,0.4)] transition-all duration-300 active:scale-[0.97] disabled:opacity-80 disabled:cursor-not-allowed overflow-hidden">
+                    
+                    <!-- Efek Cahaya Berjalan (Shimmer) -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+
+                    <!-- State Normal: Ikon & Teks -->
+                    <span wire:loading.remove class="flex items-center gap-2">
+                        <span>Kirim Kode OTP</span>
+                        <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-12" 
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </span>
+
+                    <!-- State Loading: Spinner & Teks -->
+                    <span wire:loading class="flex items-center gap-3">
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Mengirim...</span>
+                    </span>
                 </button>
 
                 {{-- Input OTP --}}
-                @if ($otpTerkirim)
-                    <div class="mt-4">
-                        <input type="text" wire:model="kodeOtp" placeholder="Masukkan Kode OTP"
-                            class="w-full border rounded-lg p-3">
+                <!-- Modal Overlay -->
+                <div x-data="otpHandler()" 
+                    x-show="$wire.otpTerkirim" 
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    class="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm">
+                    
+                    <!-- Modal Content -->
+                    <div @click.away="$wire.otpTerkirim = false"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden relative">
+                        
+                        <!-- Dekorasi Atas -->
+                        <div class="h-2 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
 
-                        @error('kodeOtp')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                        @enderror
+                        <div class="p-8">
+                            <!-- Header -->
+                            <div class="text-center mb-8">
+                                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-black text-slate-800">Verifikasi OTP</h3>
+                                <p class="text-slate-500 text-sm mt-2">Masukkan 6 digit kode yang kami kirim ke email Anda</p>
+                            </div>
 
-                        <button type="submit" class="w-full mt-3 bg-green-600 text-white py-3 rounded-lg">
-                            Verifikasi & Daftar
-                        </button>
+                            <!-- OTP Input Group -->
+                            <form wire:submit.prevent="verifikasiOtp">
+                                <div class="flex justify-between gap-2 mb-6" @paste="handlePaste($event)">
+                                    <template x-for="(i, index) in 6" :key="index">
+                                        <input type="text" 
+                                            maxlength="1" 
+                                            class="w-12 h-14 text-center text-2xl font-bold text-blue-600 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none"
+                                            x-model="digits[index]"
+                                            @keyup="handleKeyUp($event, index)"
+                                            @keydown.backspace="handleBackspace($event, index)"
+                                            x-init="$el.id = 'otp-' + index">
+                                    </template>
+                                </div>
+
+                                <!-- Hidden Input untuk Livewire -->
+                                <input type="hidden" wire:model="kodeOtp" x-model="digits.join('')">
+
+                                @error('kodeOtp')
+                                    <div class="flex items-center justify-center gap-2 text-rose-500 text-sm font-medium mb-4 animate-shake">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+                                <!-- Action Button -->
+                                <button type="submit" 
+                                        wire:loading.attr="disabled"
+                                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-600/30 transition-all active:scale-[0.98]">
+                                    <span wire:loading.remove>Verifikasi Sekarang</span>
+                                    <span wire:loading class="flex items-center justify-center gap-2">
+                                        <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                        Memproses...
+                                    </span>
+                                </button>
+                            </form>
+
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-slate-500">Tidak menerima kode? <button wire:click="kirimLink" class="text-blue-600 font-bold hover:underline">Kirim Ulang</button></p>
+                            </div>
+                        </div>
                     </div>
-                @endif
+                </div>
 
-                <!-- Submit Button -->
+                {{-- <!-- Submit Button -->
                 <button type="submit"
                     class="group w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600 bg-[length:200%_auto] animate-gradient text-white font-bold py-4 text-lg rounded-2xl shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:shadow-[0_0_30px_rgba(79,70,229,0.6)] transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] mt-10 flex items-center justify-center gap-3 relative overflow-hidden"
                     style="animation: fadeIn 0.8s ease-out 0.5s both;">
@@ -212,7 +293,7 @@
                     <div
                         class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out">
                     </div>
-                </button>
+                </button> --}}
             </form>
 
             <!-- Divider & Login Link -->
@@ -354,4 +435,9 @@
     .animate-gradient {
         animation: gradient-xy 3s linear infinite;
     }
+
+    @keyframes shimmer {
+        100% { transform: translateX(100%); }
+    }
+
 </style>

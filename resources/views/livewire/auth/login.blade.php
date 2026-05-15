@@ -132,6 +132,15 @@
                     @enderror
                 </div>
 
+                <a href="{{ route('password.request') }}" 
+                    class="text-sm font-medium text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-all group">
+                    <span class="p-1 rounded-md group-hover:bg-blue-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    </span>
+                    Lupa Password?
+                </a>
                 <!-- Submit Button -->
                 <button type="submit"
                     class="group w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600 bg-[length:200%_auto] animate-gradient text-white font-bold py-4 text-lg rounded-2xl shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:shadow-[0_0_30px_rgba(79,70,229,0.6)] transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] mt-10 flex items-center justify-center gap-3 relative overflow-hidden"
