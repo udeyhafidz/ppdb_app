@@ -79,37 +79,49 @@
                 </div>
             </div>
         @empty
-            <div class="py-20 flex flex-col items-center justify-center text-center">
-                <!-- Icon Container dengan Efek Glow -->
-                <div class="relative mb-8">
-                    <div class="absolute inset-0 bg-blue-100 rounded-full blur-2xl opacity-40 scale-150"></div>
-                    <div class="relative bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100">
-                        <!-- Heroicons: Megaphone atau Inbox -->
-                        <svg class="w-16 h-16 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
-                            </path>
-                        </svg>
+            <div class="py-24 flex flex-col items-center justify-center text-center relative overflow-hidden">
+    
+                <!-- Ornamen Background Halus -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
+
+                <!-- Icon Container dengan Animasi Floating -->
+                <div class="relative mb-10 animate-float">
+                    <!-- Glow Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-200 to-indigo-100 rounded-[3rem] blur-2xl opacity-40 scale-125"></div>
+                    
+                    <!-- Card Icon -->
+                    <div class="relative bg-white/80 backdrop-blur-sm p-8 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white">
+                        <div class="w-20 h-20 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[2rem] flex items-center justify-center">
+                            <!-- Heroicons: Chat Bubble Left Right (Lebih friendly) -->
+                            <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                        </div>
+
+                        <!-- Notifikasi Badge Palsu agar lebih detail -->
+                        <div class="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-sm">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Text Content -->
-                <div class="max-w-xs">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">Belum Ada Pengumuman</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-8">
-                        Sepertinya papan informasi kami masih kosong untuk saat ini. Cek kembali nanti ya!
+                <div class="max-w-sm px-6 relative z-10">
+                    <h3 class="text-2xl font-black text-slate-800 mb-3 tracking-tight">
+                        Belum Ada Kabar Baru
+                    </h3>
+                    <p class="text-slate-500 text-base leading-relaxed mb-10">
+                        Papan pengumuman kami sedang beristirahat sejenak. Kami akan segera memberi tahu Anda jika ada informasi terbaru!
                     </p>
                 </div>
 
-                <!-- Action Button (Opsional) -->
+                <!-- Action Button Soft -->
                 <button onclick="window.location.reload()"
-                    class="inline-flex items-center px-6 py-2.5 bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 font-bold text-sm rounded-xl transition-all duration-300 border border-transparent hover:border-blue-100">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                        </path>
+                    class="group relative inline-flex items-center gap-3 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-600 font-bold text-sm rounded-2xl transition-all duration-300 shadow-sm border border-slate-100 hover:border-blue-200 hover:text-blue-600 active:scale-95">
+                    <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 group-hover:rotate-180 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                     </svg>
-                    Refresh Halaman
+                    Refresh Informasi
                 </button>
             </div>
         @endforelse
@@ -165,6 +177,14 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+    }
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
     }
 
     .reveal-item {

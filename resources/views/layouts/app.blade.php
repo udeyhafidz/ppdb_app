@@ -57,6 +57,15 @@
             }
         }
 
+        @keyframes shine {
+            from { left: -100%; }
+            to { left: 100%; }
+        }
+
+        .animate-shine {
+            animation: shine 1.5s ease-in-out infinite;
+        }
+
         .animate-fade-in-up {
             opacity: 0;
             animation: fadeInUp 1s ease-out 0.6s forwards;
@@ -322,13 +331,29 @@
                             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
                         </div>
                     </a>
-
-                    <a href="/panduan"
-                        class="w-full md:w-auto px-10 py-5 bg-transparent text-slate-300 rounded-2xl font-bold border border-slate-700 hover:bg-slate-800/50 hover:text-white transition-all duration-500">
-                        Lihat Panduan
-                    </a>
                 </div>
             @endguest
+            <div class="mb-12 mt-5 w-full flex justify-center md:justify-center"> 
+                <a href="/panduan"
+                    class="group relative inline-flex items-center justify-center w-full md:w-auto px-10 py-5 overflow-hidden rounded-2xl bg-white/5 border border-slate-700/50 text-slate-300 font-bold transition-all duration-500 hover:border-blue-500/50 hover:text-white hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] backdrop-blur-sm">
+                    
+                    <!-- Efek Background Glow saat Hover -->
+                    <div class="absolute inset-0 w-0 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 transition-all duration-500 ease-out group-hover:w-full"></div>
+
+                    <!-- Konten Tombol -->
+                    <span class="relative flex items-center gap-2">
+                        Lihat Panduan
+                        <!-- Ikon yang bergeser saat hover -->
+                        <svg class="w-5 h-5 transition-all duration-500 transform translate-x-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-1" 
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+
+                    <!-- Garis Kilat (Shine) Tipis -->
+                    <div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-40 group-hover:animate-shine"></div>
+                </a>
+            </div>
         </div>
     </div>
 
