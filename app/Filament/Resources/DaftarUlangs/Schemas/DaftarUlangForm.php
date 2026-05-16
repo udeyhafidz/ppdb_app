@@ -14,7 +14,9 @@ class DaftarUlangForm
             ->components([
                 Select::make('pendaftar_id')
                     ->relationship('pendaftar', 'nama_siswa')
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
                 Select::make('jenis_berkas')
                     ->options([
                         'kk'    => 'Kartu Keluarga',
@@ -22,7 +24,9 @@ class DaftarUlangForm
                         'ktp'    => 'KTP Orang tua',
                         'foto'    => 'Foto Anak',
                     ])
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
                 FileUpload::make('file')
                     ->disk('local')
                     ->directory('berkas')
@@ -32,7 +36,9 @@ class DaftarUlangForm
                         'image/png',
                     ])
                     ->maxSize(2048)
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
             ]);
     }
 }

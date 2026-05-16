@@ -28,9 +28,9 @@ class UsersTable
                 TextColumn::make('role')
                     ->badge()
                     ->colors([
-                        'admin' => 'success',
-                        'petugas' => 'warning',
-                        'ortu' => 'danger',
+                        'success' => 'admin',
+                        'warning'=> 'petugas',
+                        'danger' => 'ortu',
                     ]),
                 IconColumn::make('is_active')
                     ->boolean(),

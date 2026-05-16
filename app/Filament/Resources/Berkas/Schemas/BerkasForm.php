@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Berkas\Schemas;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class BerkasForm
@@ -16,7 +15,9 @@ class BerkasForm
             ->components([
                 Select::make('pendaftar_id')
                     ->relationship('pendaftar', 'nama_siswa')
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
                 Select::make('jenis_berkas')
                     ->options([
                         'kk'    => 'Kartu Keluarga',
@@ -24,7 +25,9 @@ class BerkasForm
                         'ktp'    => 'KTP Orang tua',
                         'foto'    => 'Foto Anak',
                     ])
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
                 FileUpload::make('file')
                     ->directory('berkas')
                     ->disk('public')
@@ -35,7 +38,9 @@ class BerkasForm
                         'image/png',
                     ])
                     ->maxSize(2048)
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(false),
                 Select::make('status_berkas')
                     ->options([
                         'pending' => 'Pending',

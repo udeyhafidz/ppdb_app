@@ -19,11 +19,17 @@ class DaftarUlangsTable
         return $table
             ->columns([
                 TextColumn::make('pendaftar.nama_siswa')
-                    ->sortable(),
+                    ->sortable()
+                    ->disabled()
+                    ->hiddenOn('edit'),
                 TextColumn::make('jenis_berkas')
-                    ->searchable(),
+                    ->searchable()
+                    ->hiddenOn('edit')
+                    ->disabled(),
                 TextColumn::make('file')
-                    ->searchable(),
+                    ->searchable()
+                    ->hiddenOn('edit')
+                    ->disabled(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
